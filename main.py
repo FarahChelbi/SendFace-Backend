@@ -85,28 +85,6 @@ def store_data():
     return 'Champs textes stockés avec succès'
 
 
-
-"""
-    with driver.session() as session:
-        session.run("CREATE (status:Status {manager: $manager, time: $time}),"
-                    "(personne:Personne {name: $person}),"
-                    "(annee:Annee {annee: $year}),"
-                    "(mois:Mois {mois: $month}),"
-                    "(proposition:Proposition {proposition: $proposition})", manager=manager, time=time, person=person, year=year, month=month, proposition=proposition)
-        session.run("MATCH (status:Status {manager: $manager, time: $time}),"
-                    "(personne:Personne {name: $person}),"
-                    "(annee:Annee {annee: $year}),"
-                    "(mois:Mois {mois: $month}) "
-                    "CREATE (status)-[:EST_ASSOCIE_A]->(personne),"
-                    "(status)-[:EST_EN_ANNEE]->(annee),"
-                    "(status)-[:EST_EN_MOIS]->(mois)", manager=manager, time=time, person=person, year=year,
-                    month=month)
-
-
-    return 'Champs textes stockés avec succès'
-"""
-
-
 if __name__ == '__main__':
     app.run(debug=True)
 
