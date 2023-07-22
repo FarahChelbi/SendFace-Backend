@@ -11,8 +11,8 @@ uri = "bolt://localhost:7687"
 username = "neo4j"
 password = "password"
 driver = GraphDatabase.driver(uri, auth=(username, password)) #initialise le driver neo4j
-date_actuelle = datetime.datetime.now()
-madate = date_actuelle.strftime("%d-%m-%Y")
+#date_actuelle = datetime.datetime.now()
+#madate = date_actuelle.strftime("%d-%m-%Y")
 
 proposition = "Proposition Anonyme"
 @app.route('/store_data', methods=['POST'])
@@ -27,10 +27,6 @@ def store_data():
     person = data.get('person')
     categorie = data.get('selectedImageTitle')
     champs = data.get('selectedText')
-
-    chaine="date "
-    newdate = chaine + date
-
 
     with GraphDatabase.driver(uri, auth=(username, password)) as driver:
         with driver.session() as session:
@@ -78,10 +74,7 @@ def store_data():
                             "(proposition)-[:EST_EN_ANNEE]->(annee)", proposition=proposition, feedback=feedback,
                             month=month, year=year)
 
-
     print('Champs textes stockés avec succès')
-    print(madate)
-    print(feedback)
     return 'Champs textes stockés avec succès'
 
 
