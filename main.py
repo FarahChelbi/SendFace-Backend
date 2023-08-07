@@ -1,18 +1,20 @@
 from flask import Flask, request
 from neo4j import GraphDatabase
 from flask_cors import CORS
+import json
 import datetime
 
 app = Flask(__name__) #créer une instance de la classe flask et initialise l'application
 CORS(app)
 #CORS(app, resources={r"/store_data": {"origins": "https://localhost:53000"}})
 
-uri = "bolt://localhost:7687"
-username = "neo4j"
-password = "password"
+with open('config.json','r') as json_file:
+    config = json.load(json_file)
+uri = config['uri']
+username = config['username']
+password = config['password']
+
 driver = GraphDatabase.driver(uri, auth=(username, password)) #initialise le driver neo4j
-#date_actuelle = datetime.datetime.now()
-#madate = date_actuelle.strftime("%d-%m-%Y")
 
 proposition = "Proposition Anonyme"
 @app.route('/store_data', methods=['POST'])
